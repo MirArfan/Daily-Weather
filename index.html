@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Daily Weather</h1>
+        <div class="weather_container">
+            <div class="left-section">
+                <div class="temp">
+                    <p id="temperature">--</p>
+                </div>
+                <div class="condition">
+                    <p id="condition">--</p>
+                    <img id="condition-icon" src="" alt="Weather Icon">
+                </div>
+            </div>
+            
+            <div class="right-section">
+                <div class="location_and_time">
+                    <p id="location">--</p>
+                    <span id="time">--</span>
+                </div>
+            </div>
+        </div>
+    
+        <div class="search-location-container">
+            <form id="search-form">
+                <input type="text" placeholder="Search for a location" class="search_location" id="search-location">
+                <button type="submit" class="search_button">Search</button>
+            </form>
+        </div>
+        
+        <div id="forecast-container"></div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
