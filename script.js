@@ -5,7 +5,7 @@ let target = 'chittagong';
 form.addEventListener('submit', searchForLocation);
 
 const fetchDetails = async (targetLocation) => {
-    let url = `http://api.weatherapi.com/v1/forecast.json?key=a39fe280497c4fbc85c34957241510&q=${targetLocation}&days=7&aqi=no&alerts=no`;
+    let url = `https://api.weatherapi.com/v1/forecast.json?key=a39fe280497c4fbc85c34957241510&q=${targetLocation}&days=7&aqi=no&alerts=no`;
 
     try {
         const res = await fetch(url);
@@ -30,7 +30,7 @@ const fetchDetails = async (targetLocation) => {
     }
 };
 
-function updateDetails(locationName, time, temp, condition, iconUrl, forecast) {  // Include forecast as a parameter
+function updateDetails(locationName, time, temp, condition, iconUrl, forecast) { 
     let splitDate = time.split(' ')[0];
     let splitTime = time.split(' ')[1];
     let currentDay = getDayName(new Date(splitDate).getDay());
