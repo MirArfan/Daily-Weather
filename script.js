@@ -15,7 +15,14 @@ const fetchDetails = async (targetLocation) => {
 
     try {
         const res = await fetch(url);
+        if (!res.ok) {
+            throw new Error(`Error ${res.status}: ${res.statusText}`);
+        }
+
         const data = await res.json();
+        if (!data || !data.location || !data.forecast) {
+            throw new Error('No valid data returned from API');
+        }
         console.log(data);
 
         let locationName = data.location.name;
@@ -38,6 +45,8 @@ const fetchDetails = async (targetLocation) => {
 
         const forecastContainer = document.getElementById('forecast-container');
         forecastContainer.innerHTML = '';
+
+        
     }
 };
 
