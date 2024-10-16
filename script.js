@@ -2,6 +2,12 @@ const searchField = document.querySelector('.search_location');
 const form = document.querySelector('#search-form');
 let target = 'chittagong'; 
 
+const sortTemperatureDropdown = document.getElementById('sort-temperature');
+const filterConditionDropdown = document.getElementById('filter-condition');
+
+sortTemperatureDropdown.addEventListener('change', () => fetchDetails(target));
+filterConditionDropdown.addEventListener('change', () => fetchDetails(target));
+
 form.addEventListener('submit', searchForLocation);
 
 const fetchDetails = async (targetLocation) => {
@@ -18,15 +24,20 @@ const fetchDetails = async (targetLocation) => {
         let condition = data.current.condition.text;
         let iconUrl = data.current.condition.icon;
         let forecast = data.forecast.forecastday; 
-        let country=data.location.country; 
+        // let country=data.location.country; 
 
-        updateDetails(locationName, time, temp, condition, iconUrl, forecast, country);
+        updateDetails(locationName, time, temp, condition, iconUrl, forecast);
 
     } catch (error) {
         console.error('Error fetching data:', error);
         document.getElementById('location').innerText = 'Location not found';
         document.getElementById('temperature').innerText = '--';
         document.getElementById('condition').innerText = '--';
+        document.getElementById('condition-icon').src = ''; 
+
+
+        const forecastContainer = document.getElementById('forecast-container');
+        forecastContainer.innerHTML = '';
     }
 };
 
@@ -40,6 +51,25 @@ function updateDetails(locationName, time, temp, condition, iconUrl, forecast) {
     document.getElementById('time').innerHTML = `${splitDate} <br> ${currentDay}<br> Time :  ${splitTime}`;
     document.getElementById('condition').innerText = condition;
     document.getElementById('condition-icon').src = iconUrl; 
+
+
+
+
+    // Get user sorting and filtering preferences
+    const sortOption = document.getElementById('sort-temperature').value;
+    const filterCondition = document.getElementById('filter-condition').value;
+
+    // Apply filtering
+    if (filterCondition) {
+        forecast = forecast.filter(day => day.day.condition.text.includes(filterCondition));
+    }
+
+    // Apply sorting by temperature
+    if (sortOption === 'asc') {
+        forecast.sort((a, b) => a.day.maxtemp_c - b.day.maxtemp_c);  // Low to High
+    } else if (sortOption === 'desc') {
+        forecast.sort((a, b) => b.day.maxtemp_c - a.day.maxtemp_c);  // High to Low
+    }
 
     const forecastContainer = document.getElementById('forecast-container');
     forecastContainer.innerHTML = ''; 

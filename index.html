@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Daily Weather</h1>
+        <h1 class="heading">Daily Weather</h1>
         <div class="weather_container">
             <div class="left-section">
                 <div class="temp">
@@ -33,9 +33,26 @@
     
         <div class="search-location-container">
             <form id="search-form">
-                <input type="text" placeholder="Search for a location" class="search_location" id="search-location">
+                <input type="text" required placeholder="Search for a location" class="search_location" id="search-location">
                 <button type="submit" class="search_button">Search</button>
             </form>
+
+            <div class="sort-filter-section">
+                <select id="sort-temperature" class="sort-filter">
+                    <option value="">Sort by Temperature</option>
+                    <option value="asc">Low to High</option>
+                    <option value="desc">High to Low</option>
+                </select>
+        
+                <select id="filter-condition" class="sort-filter">
+                    <option value="">Filter by Condition</option>
+                    <option value="Clear">Clear</option>
+                    <option value="Cloudy">Cloudy</option>
+                    <option value="Rain">Rain</option>
+                    <option value="Snow">Snow</option>
+                    <option value="Sunny">Sunny</option>
+                </select>
+            </div>
         </div>
         
         <div id="forecast-container"></div>
